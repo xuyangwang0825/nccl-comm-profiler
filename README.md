@@ -182,6 +182,14 @@ In the timeline you'll see NCCL kernels like:
 - `ncclKernel_AllReduce_RING_LL_Sum_float` — the ring + LL protocol
 - `ncclKernel_AllReduce_TREE_...` — tree algorithm (used for small N or small messages)
 
+## Running on Lambda Cloud
+
+See [SETUP_LAMBDA.md](SETUP_LAMBDA.md) for a full guide: spinning up a 2-GPU instance, installing dependencies, building, running, and copying results back.
+
+Quick instance recommendations:
+- **`gpu_2x_a10`** (~$1.5/hr) — cheapest 2-GPU, PCIe only, good for development
+- **`gpu_8x_a100`** (~$10/hr) — NVLink, reproduces the 280 GB/s headline numbers
+
 ## References
 
 - [NCCL User Guide](https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/overview.html)
