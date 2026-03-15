@@ -121,9 +121,11 @@ void ring_worker(int rank, RingState* st, std::barrier<>* bar) {
 
         bar->arrive_and_wait();  // all threads ready to transfer
 
-        // Push our chunk into the next GPU's recv slot for that chunk index
+        // Push our chunk into the next GPU's recv slot for that chunk index.
+        // Destination offset is send_chunk: the receiver reads from the same
+        // chunk index when it does its reduction below.
         CUDA_CHECK(cudaMemcpyPeerAsync(
-            st->d_recv[send_to] + (size_t)recv_chunk * chunk,  // dst ptr on next GPU
+            st->d_recv[send_to] + (size_t)send_chunk * chunk,  // dst ptr on next GPU
             send_to,                                             // dst device
             st->d_data[rank]   + (size_t)send_chunk * chunk,   // src ptr on this GPU
             rank,                                               // src device
@@ -161,7 +163,9 @@ void ring_worker(int rank, RingState* st, std::barrier<>* bar) {
 
     for (int step = 0; step < N - 1; step++) {
         const int send_to    = (rank + 1) % N;
-        const int send_chunk = (rank - step + N) % N;
+        // After reduce-scatter, GPU rank owns chunk (rank+1)%N (the last recv_chunk).
+        // Allgather must start from that owned chunk, hence the +1 offset.
+        const int send_chunk = (rank + 1 - step + N) % N;
 
         bar->arrive_and_wait();  // all ready to transfer
 
