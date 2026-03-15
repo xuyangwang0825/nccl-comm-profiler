@@ -182,13 +182,15 @@ In the timeline you'll see NCCL kernels like:
 - `ncclKernel_AllReduce_RING_LL_Sum_float` — the ring + LL protocol
 - `ncclKernel_AllReduce_TREE_...` — tree algorithm (used for small N or small messages)
 
-## Running on Lambda Cloud
+## Running on a GPU Cloud Instance
 
-See [SETUP_LAMBDA.md](SETUP_LAMBDA.md) for a full guide: spinning up a 2-GPU instance, installing dependencies, building, running, and copying results back.
+| Provider | Guide | 2× A10 (PCIe) | 2× A100 (NVLink) |
+|---|---|---|---|
+| Lambda Cloud | [SETUP_LAMBDA.md](SETUP_LAMBDA.md) | ~$1.5/hr | ~$10/hr (8×A100) |
+| Vast.ai | [SETUP_VAST.md](SETUP_VAST.md) | ~$0.8–1.2/hr | ~$2–4/hr |
 
-Quick instance recommendations:
-- **`gpu_2x_a10`** (~$1.5/hr) — cheapest 2-GPU, PCIe only, good for development
-- **`gpu_8x_a100`** (~$10/hr) — NVLink, reproduces the 280 GB/s headline numbers
+Both guides cover the full workflow: spin up, install deps, build, run, copy results back.
+Use Vast.ai when Lambda is out of capacity — setup is nearly identical.
 
 ## References
 

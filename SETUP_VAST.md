@@ -1,81 +1,82 @@
-# Lambda Cloud Setup Guide
+# Vast.ai Setup Guide
 
-How to spin up a 2-GPU instance on Lambda Labs and run this profiler end-to-end.
+How to spin up a 2-GPU instance on Vast.ai and run this profiler end-to-end.
+Good fallback when Lambda Cloud is out of capacity — usually cheaper and more available.
 
-> **Lambda out of capacity?** See [SETUP_VAST.md](SETUP_VAST.md) for Vast.ai instructions.
+> **Prefer Lambda?** See [SETUP_LAMBDA.md](SETUP_LAMBDA.md).
 
 ---
 
 ## 1. Create Account & Add SSH Key
 
-1. Go to [lambdalabs.com](https://lambdalabs.com) → Sign up
-2. **Dashboard → SSH Keys → Add SSH Key**
+1. Go to [vast.ai](https://vast.ai) → Sign up
+2. **Account → SSH Keys → Add SSH Key**
    ```bash
    # On your Mac, generate a key if you don't have one
-   ssh-keygen -t ed25519 -C "lambda"
-   cat ~/.ssh/id_ed25519.pub   # copy this output into Lambda's SSH key field
+   ssh-keygen -t ed25519 -C "vast"
+   cat ~/.ssh/id_ed25519.pub   # copy this output into Vast's SSH key field
    ```
 
 ---
 
-## 2. Launch a 2-GPU Instance
+## 2. Find a 2-GPU Instance
 
-**Dashboard → Instances → Launch Instance**
+**Search → Rent** — use these filters:
 
-Recommended instance types (check availability — Lambda stock fluctuates):
+```
+GPU Count:  2
+GPU Name:   A10 or A100
+CUDA:       >= 11.0
+```
 
-| Instance | GPUs | Interconnect | Price | CUDA arch |
-|---|---|---|---|---|
-| `gpu_8x_a100` | 8× A100 SXM4 | **NVLink** | ~$10/hr | `80` |
-| `gpu_2x_a10`  | 2× A10       | PCIe only  | ~$1.5/hr | `86` |
-| `gpu_1x_a100` | 1× A100      | n/a        | ~$1.3/hr | `80` |
+Check the **Interconnect** column in results:
+- `NVLink` — fast (~200–280 GB/s busbw)
+- `PCIe` / `SXM` without NVLink — slower (~25–35 GB/s), fine for dev
 
-> **Recommendation**: Start with `gpu_2x_a10` (cheapest 2-GPU option). It's PCIe
-> only (no NVLink), so your busbw will be lower (~30 GB/s), but it's perfect for
-> learning and testing the code. If you want the NVLink comparison data for the
-> resume, grab `gpu_8x_a100` for 1-2 hours.
+**Recommended template**: `pytorch/pytorch:2.1.0-cuda12.1-cudnn8-devel`
+(has CUDA dev headers, gcc 11, Python 3.10 — saves install time)
 
-Select:
-- **Region**: US-West or US-TX (pick whichever has stock)
-- **Filesystem**: None needed for this project
-- Click **Launch** → confirm
+> Tip: Sort by **$/hr** and filter **On-demand** to avoid spot interruptions.
+> 2× A10 PCIe is usually available for ~$0.8–1.2/hr.
+
+Typical prices:
+
+| GPUs | Interconnect | Price |
+|---|---|---|
+| 2× A10 | PCIe | ~$0.8–1.2/hr |
+| 2× A100 | NVLink | ~$2–4/hr |
+
+Click **Rent** → confirm.
 
 ---
 
 ## 3. Connect via SSH
 
-Lambda shows you the IP after the instance starts (takes ~1 min).
+Vast shows the exact SSH command in **Instances → Connect**. It looks like:
 
 ```bash
-# Replace with your actual instance IP
-ssh ubuntu@<INSTANCE_IP>
-
-# Or add to ~/.ssh/config for convenience:
-# Host lambda
-#     HostName <INSTANCE_IP>
-#     User ubuntu
-#     IdentityFile ~/.ssh/id_ed25519
-# Then just: ssh lambda
+ssh -p 12345 root@<IP_ADDRESS>
 ```
+
+The port varies per instance — copy the full command from the dashboard.
 
 ---
 
-## 4. What's Pre-installed (Lambda already set up for you)
+## 4. What's Pre-installed (PyTorch devel image)
 
-Lambda's base image includes:
 ```
-CUDA 12.x          ✓  (check with: nvcc --version)
+CUDA 12.x          ✓
 cuDNN              ✓
 Python 3.10        ✓
 PyTorch            ✓
+gcc / g++ 11       ✓
+cmake 3.22         ✓
 nvidia-smi         ✓
-gcc / g++ 11       ✓  (supports C++20 for std::barrier)
+NCCL dev headers   ✓  (included in devel image)
 ```
 
-**Not pre-installed** (you need to install):
+**Not pre-installed:**
 ```
-NCCL dev headers   ✗
-CMake >= 3.18      ✗  (system cmake is usually 3.22, check first)
 OpenMPI            ✗
 matplotlib/numpy   ✗
 ```
@@ -84,37 +85,29 @@ matplotlib/numpy   ✗
 
 ## 5. Environment Setup
 
-Run this block once after SSHing in. Takes ~3 minutes.
+Run this block once after SSHing in. Takes ~1 minute (less than Lambda — NCCL already present).
 
 ```bash
-# ── Update package list ──────────────────────────────────────────────
 sudo apt update -y
 
-# ── NCCL (library + dev headers) ─────────────────────────────────────
-# Lambda's CUDA is in /usr/local/cuda, so we use the CUDA repo NCCL
-sudo apt install -y libnccl2 libnccl-dev
-
-# Verify NCCL is installed:
-dpkg -l | grep nccl
-# Should show libnccl2 and libnccl-dev
-
 # ── OpenMPI ───────────────────────────────────────────────────────────
-# MPI is used for multi-node. For single-node we only need the headers.
 sudo apt install -y libopenmpi-dev openmpi-bin
 
 # Verify:
 mpirun --version
 
-# ── CMake ─────────────────────────────────────────────────────────────
-cmake --version   # if >= 3.18, you're good. Otherwise:
-# sudo apt install -y cmake   # or pip install cmake
-
 # ── Python packages ───────────────────────────────────────────────────
 pip install matplotlib numpy
 
-# ── Git (already installed, just in case) ─────────────────────────────
-git --version
+# ── Verify NCCL headers are present ──────────────────────────────────
+find /usr -name "nccl.h" 2>/dev/null
+# Should print something like /usr/include/nccl.h
 ```
+
+> If NCCL headers are missing (e.g. you chose a non-devel image), install them:
+> ```bash
+> sudo apt install -y libnccl2 libnccl-dev
+> ```
 
 ---
 
@@ -142,7 +135,7 @@ nvidia-smi --query-gpu=name --format=csv,noheader
 # Build — replace 86 with your GPU's architecture number
 mkdir build && cd build
 cmake .. -DCMAKE_BUILD_TYPE=Release -DCMAKE_CUDA_ARCHITECTURES=86
-make -j$(nproc)     # nproc = number of CPU cores, speeds up compilation
+make -j$(nproc)
 
 # Verify both binaries exist:
 ls -lh nccl_bench ring_allreduce
@@ -170,6 +163,7 @@ GPU1  PHB    X
 
 ```bash
 # Quick ring_allreduce test on 2 GPUs (16 MB)
+cd ~/nccl-comm-profiler/build
 ./ring_allreduce 2 4194304
 # Expected: [PASS] with some busbw number
 ```
@@ -199,11 +193,11 @@ ls results/
 ## 9. Copy Results Back to Your Mac
 
 ```bash
-# On your Mac (not on the instance):
-scp -r ubuntu@<INSTANCE_IP>:~/nccl-comm-profiler/results ./results_lambda
+# On your Mac — note the -p flag for the custom port
+scp -P 12345 -r root@<IP>:~/nccl-comm-profiler/results ./results_vast
 
-# Or with rsync (faster, skips unchanged files):
-rsync -avz ubuntu@<INSTANCE_IP>:~/nccl-comm-profiler/results/ ./results_lambda/
+# Or with rsync:
+rsync -avz -e "ssh -p 12345" root@<IP>:~/nccl-comm-profiler/results/ ./results_vast/
 ```
 
 ---
@@ -217,19 +211,16 @@ cd ~/nccl-comm-profiler
 git config user.email "wangxuyang1998@gmail.com"
 git config user.name "Xuyang Wang"
 
-# Add a .gitignore first
 cat > .gitignore << 'EOF'
 build/
 results/*.log
 results/*.csv
-# Keep plots in results/plots/ if you want them in the repo
 EOF
 
 git add .
 git commit -m "Add benchmarks and profiler"
 
-# Push — you'll need a GitHub personal access token since SSH keys
-# on the instance are different from your GitHub SSH key
+# Push with a GitHub personal access token
 # Generate one at: github.com → Settings → Developer Settings → Tokens
 git remote set-url origin https://<YOUR_TOKEN>@github.com/xuyangwang0825/nccl-comm-profiler.git
 git push origin main
@@ -237,16 +228,16 @@ git push origin main
 
 ---
 
-## 11. Terminate the Instance (Important — saves money)
+## 11. Destroy the Instance (Important — saves money)
 
-**Dashboard → Instances → Terminate**
+**Instances → Destroy**
 
-> ⚠️ **Terminate** (not just stop) — Lambda charges per hour even when idle.
-> Your files are lost on termination, so push to GitHub or download results first.
+> ⚠️ **Destroy** (not just stop) — Vast bills per second even when idle.
+> Download results or push to GitHub before destroying.
 
 Cost estimate:
-- 2× A10 at $1.5/hr × 2 hours = **~$3** for full benchmarks + exploration
-- 8× A100 at $10/hr × 1 hour = **~$10** for NVLink comparison data
+- 2× A10 at ~$1/hr × 2 hours = **~$2** for full benchmarks + exploration
+- 2× A100 NVLink at ~$3/hr × 1 hour = **~$3** for NVLink comparison data
 
 ---
 
@@ -269,15 +260,13 @@ cmake .. -DNCCL_INCLUDE_DIR=/path/to/include -DNCCL_LIB=/path/to/libnccl.so
 
 **`nvcc fatal: Unsupported gpu architecture 'compute_86'`**
 ```bash
-# Your CUDA version is too old for that architecture.
 nvcc --version   # check version
-# CUDA 11.1+ supports sm_86. Lambda should have CUDA 12, so this shouldn't happen.
+# CUDA 11.1+ supports sm_86. Vast's devel image ships CUDA 12, so this shouldn't happen.
 # If it does: cmake .. -DCMAKE_CUDA_ARCHITECTURES=80
 ```
 
 **`std::barrier` compile error**
 ```bash
-# Need gcc 11+ for C++20 std::barrier
 g++ --version
 # If < 11:
 sudo apt install -y g++-11
@@ -286,17 +275,14 @@ cmake .. -DCMAKE_CXX_COMPILER=g++-11
 
 **Ring allreduce shows `[FAIL]`**
 ```bash
-# Likely P2P access issue. Check:
 ./ring_allreduce 2 4194304   # watch for [warn] no direct P2P messages
-# If PCIe only, P2P may still work via staging — [FAIL] means wrong values,
-# which indicates a bug. Open an issue or check that count % n_gpus == 0.
+# [FAIL] means wrong values (a bug), not a perf issue.
+# Check that count % n_gpus == 0.
 ```
 
 ---
 
 ## What to Check in the Results
-
-After running, look for these numbers:
 
 ```bash
 # Peak NCCL AllReduce busbw (the headline number for your resume):
@@ -316,6 +302,5 @@ cat results/topology.json
 |---|---|---|
 | 2× A10 (PCIe) | 25–35 GB/s | 8–15 GB/s |
 | 2× A100 (NVLink) | 200–280 GB/s | 60–100 GB/s |
-| 8× A100 (NVLink) | 200–280 GB/s | 60–100 GB/s |
 
 These numbers are what you'll cite in your interview.
