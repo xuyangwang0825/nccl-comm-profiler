@@ -1,0 +1,194 @@
+NCCL Collective Benchmark: 2 GPUs
+
+490975bbbd70:4198:4198 [0] NCCL INFO cudaDriverVersion 12060
+490975bbbd70:4198:4198 [0] NCCL INFO Bootstrap : Using eth0:172.17.0.3<0>
+490975bbbd70:4198:4198 [0] NCCL INFO NCCL version 2.23.4+cuda12.6
+490975bbbd70:4198:4205 [0] NCCL INFO NET/Plugin: Could not find: libnccl-net.so. Using internal network plugin.
+490975bbbd70:4198:4205 [0] NCCL INFO NET/IB : No device found.
+490975bbbd70:4198:4205 [0] NCCL INFO NET/Socket : Using [0]eth0:172.17.0.3<0>
+490975bbbd70:4198:4205 [0] NCCL INFO PROFILER/Plugin: Could not find: libnccl-profiler.so.
+490975bbbd70:4198:4205 [0] NCCL INFO Using network Socket
+490975bbbd70:4198:4206 [1] NCCL INFO Using network Socket
+490975bbbd70:4198:4205 [0] NCCL INFO ncclCommInitAll comm 0x561fc630d930 rank 0 nranks 2 cudaDev 0 nvmlDev 0 busId 83000 commId 0x26adb8153da48eaf - Init START
+490975bbbd70:4198:4206 [1] NCCL INFO ncclCommInitAll comm 0x561fc6d1a850 rank 1 nranks 2 cudaDev 1 nvmlDev 1 busId 84000 commId 0x26adb8153da48eaf - Init START
+490975bbbd70:4198:4205 [0] NCCL INFO Bootstrap timings total 0.000635 (create 0.000052, send 0.000149, recv 0.000169, ring 0.000029, delay 0.000001)
+490975bbbd70:4198:4206 [1] NCCL INFO Bootstrap timings total 0.000552 (create 0.000050, send 0.000139, recv 0.000177, ring 0.000023, delay 0.000000)
+490975bbbd70:4198:4206 [1] NCCL INFO Setting affinity for GPU 1 to ffffffff,00000000,ffffffff,00000000
+490975bbbd70:4198:4205 [0] NCCL INFO Setting affinity for GPU 0 to ffffffff,00000000,ffffffff,00000000
+490975bbbd70:4198:4205 [0] NCCL INFO comm 0x561fc630d930 rank 0 nRanks 2 nNodes 1 localRanks 2 localRank 0 MNNVL 0
+490975bbbd70:4198:4206 [1] NCCL INFO comm 0x561fc6d1a850 rank 1 nRanks 2 nNodes 1 localRanks 2 localRank 1 MNNVL 0
+490975bbbd70:4198:4206 [1] NCCL INFO Trees [0] -1/-1/-1->1->0 [1] -1/-1/-1->1->0 [2] -1/-1/-1->1->0 [3] -1/-1/-1->1->0 [4] 0/-1/-1->1->-1 [5] 0/-1/-1->1->-1 [6] 0/-1/-1->1->-1 [7] 0/-1/-1->1->-1 [8] -1/-1/-1->1->0 [9] -1/-1/-1->1->0 [10] -1/-1/-1->1->0 [11] -1/-1/-1->1->0 [12] 0/-1/-1->1->-1 [13] 0/-1/-1->1->-1 [14] 0/-1/-1->1->-1 [15] 0/-1/-1->1->-1
+490975bbbd70:4198:4205 [0] NCCL INFO Channel 00/16 : 0 1
+490975bbbd70:4198:4205 [0] NCCL INFO Channel 01/16 : 0 1
+490975bbbd70:4198:4205 [0] NCCL INFO Channel 02/16 : 0 1
+490975bbbd70:4198:4206 [1] NCCL INFO P2P Chunksize set to 524288
+490975bbbd70:4198:4205 [0] NCCL INFO Channel 03/16 : 0 1
+490975bbbd70:4198:4205 [0] NCCL INFO Channel 04/16 : 0 1
+490975bbbd70:4198:4205 [0] NCCL INFO Channel 05/16 : 0 1
+490975bbbd70:4198:4205 [0] NCCL INFO Channel 06/16 : 0 1
+490975bbbd70:4198:4205 [0] NCCL INFO Channel 07/16 : 0 1
+490975bbbd70:4198:4205 [0] NCCL INFO Channel 08/16 : 0 1
+490975bbbd70:4198:4205 [0] NCCL INFO Channel 09/16 : 0 1
+490975bbbd70:4198:4205 [0] NCCL INFO Channel 10/16 : 0 1
+490975bbbd70:4198:4205 [0] NCCL INFO Channel 11/16 : 0 1
+490975bbbd70:4198:4205 [0] NCCL INFO Channel 12/16 : 0 1
+490975bbbd70:4198:4205 [0] NCCL INFO Channel 13/16 : 0 1
+490975bbbd70:4198:4205 [0] NCCL INFO Channel 14/16 : 0 1
+490975bbbd70:4198:4205 [0] NCCL INFO Channel 15/16 : 0 1
+490975bbbd70:4198:4205 [0] NCCL INFO Trees [0] 1/-1/-1->0->-1 [1] 1/-1/-1->0->-1 [2] 1/-1/-1->0->-1 [3] 1/-1/-1->0->-1 [4] -1/-1/-1->0->1 [5] -1/-1/-1->0->1 [6] -1/-1/-1->0->1 [7] -1/-1/-1->0->1 [8] 1/-1/-1->0->-1 [9] 1/-1/-1->0->-1 [10] 1/-1/-1->0->-1 [11] 1/-1/-1->0->-1 [12] -1/-1/-1->0->1 [13] -1/-1/-1->0->1 [14] -1/-1/-1->0->1 [15] -1/-1/-1->0->1
+490975bbbd70:4198:4205 [0] NCCL INFO P2P Chunksize set to 524288
+490975bbbd70:4198:4212 [0] NCCL INFO [Proxy Service] Device 0 CPU core 118
+490975bbbd70:4198:4213 [1] NCCL INFO [Proxy Service] Device 1 CPU core 123
+490975bbbd70:4198:4214 [0] NCCL INFO [Proxy Service UDS] Device 0 CPU core 45
+490975bbbd70:4198:4215 [1] NCCL INFO [Proxy Service UDS] Device 1 CPU core 51
+490975bbbd70:4198:4205 [0] NCCL INFO threadThresholds 8/8/64 | 16/8/64 | 512 | 512
+490975bbbd70:4198:4205 [0] NCCL INFO 16 coll channels, 16 collnet channels, 0 nvls channels, 16 p2p channels, 16 p2p channels per peer
+490975bbbd70:4198:4206 [1] NCCL INFO threadThresholds 8/8/64 | 16/8/64 | 512 | 512
+490975bbbd70:4198:4206 [1] NCCL INFO 16 coll channels, 16 collnet channels, 0 nvls channels, 16 p2p channels, 16 p2p channels per peer
+490975bbbd70:4198:4205 [0] NCCL INFO CC Off, Multi-GPU CC Off, workFifoBytes 1048576
+490975bbbd70:4198:4205 [0] NCCL INFO TUNER/Plugin: Could not find: libnccl-tuner.so libnccl-net.so. Using internal tuner plugin.
+490975bbbd70:4198:4205 [0] NCCL INFO ncclCommInitAll comm 0x561fc630d930 rank 0 nranks 2 cudaDev 0 nvmlDev 0 busId 83000 commId 0x26adb8153da48eaf - Init COMPLETE
+490975bbbd70:4198:4205 [0] NCCL INFO Init timings - ncclCommInitAll: rank 0 nranks 2 total 1.18 (kernels 0.83, alloc 0.14, bootstrap 0.00, allgathers 0.00, topo 0.20, graphs 0.00, connections 0.01, rest 0.00)
+490975bbbd70:4198:4206 [1] NCCL INFO ncclCommInitAll comm 0x561fc6d1a850 rank 1 nranks 2 cudaDev 1 nvmlDev 1 busId 84000 commId 0x26adb8153da48eaf - Init COMPLETE
+490975bbbd70:4198:4206 [1] NCCL INFO Init timings - ncclCommInitAll: rank 1 nranks 2 total 1.18 (kernels 0.83, alloc 0.14, bootstrap 0.00, allgathers 0.00, topo 0.20, graphs 0.00, connections 0.01, rest 0.00)
+# op,size_bytes,count,time_us,algbw_GBps,busbw_GBps
+490975bbbd70:4198:4217 [0] NCCL INFO Channel 00/0 : 0[0] -> 1[1] via P2P/direct pointer
+490975bbbd70:4198:4216 [1] NCCL INFO Channel 00/0 : 1[1] -> 0[0] via P2P/direct pointer
+490975bbbd70:4198:4217 [0] NCCL INFO Channel 01/0 : 0[0] -> 1[1] via P2P/direct pointer
+490975bbbd70:4198:4216 [1] NCCL INFO Channel 01/0 : 1[1] -> 0[0] via P2P/direct pointer
+490975bbbd70:4198:4217 [0] NCCL INFO Channel 02/0 : 0[0] -> 1[1] via P2P/direct pointer
+490975bbbd70:4198:4216 [1] NCCL INFO Channel 02/0 : 1[1] -> 0[0] via P2P/direct pointer
+490975bbbd70:4198:4217 [0] NCCL INFO Channel 03/0 : 0[0] -> 1[1] via P2P/direct pointer
+490975bbbd70:4198:4216 [1] NCCL INFO Channel 03/0 : 1[1] -> 0[0] via P2P/direct pointer
+490975bbbd70:4198:4217 [0] NCCL INFO Channel 04/0 : 0[0] -> 1[1] via P2P/direct pointer
+490975bbbd70:4198:4216 [1] NCCL INFO Channel 04/0 : 1[1] -> 0[0] via P2P/direct pointer
+490975bbbd70:4198:4217 [0] NCCL INFO Channel 05/0 : 0[0] -> 1[1] via P2P/direct pointer
+490975bbbd70:4198:4216 [1] NCCL INFO Channel 05/0 : 1[1] -> 0[0] via P2P/direct pointer
+490975bbbd70:4198:4217 [0] NCCL INFO Channel 06/0 : 0[0] -> 1[1] via P2P/direct pointer
+490975bbbd70:4198:4216 [1] NCCL INFO Channel 06/0 : 1[1] -> 0[0] via P2P/direct pointer
+490975bbbd70:4198:4217 [0] NCCL INFO Channel 07/0 : 0[0] -> 1[1] via P2P/direct pointer
+490975bbbd70:4198:4216 [1] NCCL INFO Channel 07/0 : 1[1] -> 0[0] via P2P/direct pointer
+490975bbbd70:4198:4217 [0] NCCL INFO Channel 08/0 : 0[0] -> 1[1] via P2P/direct pointer
+490975bbbd70:4198:4216 [1] NCCL INFO Channel 08/0 : 1[1] -> 0[0] via P2P/direct pointer
+490975bbbd70:4198:4217 [0] NCCL INFO Channel 09/0 : 0[0] -> 1[1] via P2P/direct pointer
+490975bbbd70:4198:4216 [1] NCCL INFO Channel 09/0 : 1[1] -> 0[0] via P2P/direct pointer
+490975bbbd70:4198:4217 [0] NCCL INFO Channel 10/0 : 0[0] -> 1[1] via P2P/direct pointer
+490975bbbd70:4198:4216 [1] NCCL INFO Channel 10/0 : 1[1] -> 0[0] via P2P/direct pointer
+490975bbbd70:4198:4217 [0] NCCL INFO Channel 11/0 : 0[0] -> 1[1] via P2P/direct pointer
+490975bbbd70:4198:4216 [1] NCCL INFO Channel 11/0 : 1[1] -> 0[0] via P2P/direct pointer
+490975bbbd70:4198:4217 [0] NCCL INFO Channel 12/0 : 0[0] -> 1[1] via P2P/direct pointer
+490975bbbd70:4198:4216 [1] NCCL INFO Channel 12/0 : 1[1] -> 0[0] via P2P/direct pointer
+490975bbbd70:4198:4217 [0] NCCL INFO Channel 13/0 : 0[0] -> 1[1] via P2P/direct pointer
+490975bbbd70:4198:4216 [1] NCCL INFO Channel 13/0 : 1[1] -> 0[0] via P2P/direct pointer
+490975bbbd70:4198:4217 [0] NCCL INFO Channel 14/0 : 0[0] -> 1[1] via P2P/direct pointer
+490975bbbd70:4198:4216 [1] NCCL INFO Channel 14/0 : 1[1] -> 0[0] via P2P/direct pointer
+490975bbbd70:4198:4217 [0] NCCL INFO Channel 15/0 : 0[0] -> 1[1] via P2P/direct pointer
+490975bbbd70:4198:4216 [1] NCCL INFO Channel 15/0 : 1[1] -> 0[0] via P2P/direct pointer
+490975bbbd70:4198:4216 [1] NCCL INFO Connected all rings
+490975bbbd70:4198:4217 [0] NCCL INFO Connected all rings
+AllReduce,8,2,7.76,0.001,0.001
+AllReduce,16,4,7.31,0.002,0.002
+AllReduce,32,8,7.59,0.004,0.004
+AllReduce,64,16,7.65,0.008,0.008
+AllReduce,128,32,7.37,0.017,0.017
+AllReduce,256,64,7.47,0.034,0.034
+AllReduce,512,128,7.40,0.069,0.069
+AllReduce,1024,256,7.18,0.143,0.143
+AllReduce,2048,512,7.20,0.285,0.285
+AllReduce,4096,1024,7.35,0.557,0.557
+AllReduce,8192,2048,7.53,1.088,1.088
+AllReduce,16384,4096,7.52,2.179,2.179
+AllReduce,32768,8192,7.59,4.315,4.315
+AllReduce,65536,16384,8.23,7.964,7.964
+AllReduce,131072,32768,8.63,15.190,15.190
+AllReduce,262144,65536,9.17,28.598,28.598
+AllReduce,524288,131072,11.99,43.737,43.737
+AllReduce,1048576,262144,18.28,57.347,57.347
+AllReduce,2097152,524288,36.39,57.637,57.637
+AllReduce,4194304,1048576,41.03,102.216,102.216
+AllReduce,8388608,2097152,62.88,133.410,133.410
+AllReduce,16777216,4194304,108.41,154.753,154.753
+AllReduce,33554432,8388608,196.10,171.111,171.111
+AllReduce,67108864,16777216,364.63,184.045,184.045
+AllReduce,134217728,33554432,686.31,195.564,195.564
+AllReduce,268435456,67108864,1329.92,201.843,201.843
+AllGather,8,2,7.80,0.001,0.001
+AllGather,16,4,7.75,0.002,0.001
+AllGather,32,8,7.84,0.004,0.002
+AllGather,64,16,8.03,0.008,0.004
+AllGather,128,32,7.85,0.016,0.008
+AllGather,256,64,7.58,0.034,0.017
+AllGather,512,128,7.76,0.066,0.033
+AllGather,1024,256,7.68,0.133,0.067
+AllGather,2048,512,7.70,0.266,0.133
+AllGather,4096,1024,8.29,0.494,0.247
+AllGather,8192,2048,7.80,1.050,0.525
+AllGather,16384,4096,7.81,2.098,1.049
+AllGather,32768,8192,7.92,4.140,2.070
+AllGather,65536,16384,8.17,8.017,4.009
+AllGather,131072,32768,8.41,15.589,7.794
+AllGather,262144,65536,10.52,24.922,12.461
+AllGather,524288,131072,14.68,35.707,17.853
+AllGather,1048576,262144,23.65,44.332,22.166
+AllGather,2097152,524288,33.26,63.055,31.527
+AllGather,4194304,1048576,45.22,92.745,46.373
+AllGather,8388608,2097152,69.60,120.534,60.267
+AllGather,16777216,4194304,121.45,138.136,69.068
+AllGather,33554432,8388608,216.86,154.730,77.365
+AllGather,67108864,16777216,401.66,167.078,83.539
+AllGather,134217728,33554432,752.98,178.250,89.125
+AllGather,268435456,67108864,1489.45,180.224,90.112
+ReduceScatter,8,2,7.62,0.001,0.001
+ReduceScatter,16,4,7.49,0.002,0.001
+ReduceScatter,32,8,7.30,0.004,0.002
+ReduceScatter,64,16,7.45,0.009,0.004
+ReduceScatter,128,32,7.62,0.017,0.008
+ReduceScatter,256,64,7.50,0.034,0.017
+ReduceScatter,512,128,7.45,0.069,0.034
+ReduceScatter,1024,256,7.43,0.138,0.069
+ReduceScatter,2048,512,7.43,0.276,0.138
+ReduceScatter,4096,1024,7.27,0.563,0.282
+ReduceScatter,8192,2048,7.40,1.107,0.553
+ReduceScatter,16384,4096,7.40,2.214,1.107
+ReduceScatter,32768,8192,7.53,4.352,2.176
+ReduceScatter,65536,16384,7.79,8.411,4.205
+ReduceScatter,131072,32768,8.29,15.806,7.903
+ReduceScatter,262144,65536,9.88,26.533,13.266
+ReduceScatter,524288,131072,13.99,37.466,18.733
+ReduceScatter,1048576,262144,21.20,49.450,24.725
+ReduceScatter,2097152,524288,30.37,69.047,34.524
+ReduceScatter,4194304,1048576,42.99,97.567,48.784
+ReduceScatter,8388608,2097152,69.30,121.046,60.523
+ReduceScatter,16777216,4194304,123.67,135.662,67.831
+ReduceScatter,33554432,8388608,224.49,149.468,74.734
+ReduceScatter,67108864,16777216,396.57,169.223,84.611
+ReduceScatter,134217728,33554432,793.36,169.177,84.589
+ReduceScatter,268435456,67108864,1490.12,180.143,90.072
+Broadcast,8,2,7.79,0.001,0.001
+Broadcast,16,4,7.61,0.002,0.001
+Broadcast,32,8,7.32,0.004,0.002
+Broadcast,64,16,7.44,0.009,0.004
+Broadcast,128,32,7.77,0.016,0.008
+Broadcast,256,64,7.64,0.033,0.017
+Broadcast,512,128,7.67,0.067,0.033
+Broadcast,1024,256,7.57,0.135,0.068
+Broadcast,2048,512,7.55,0.271,0.136
+Broadcast,4096,1024,7.44,0.550,0.275
+Broadcast,8192,2048,7.58,1.081,0.540
+Broadcast,16384,4096,7.78,2.105,1.052
+Broadcast,32768,8192,8.02,4.087,2.044
+Broadcast,65536,16384,8.22,7.972,3.986
+Broadcast,131072,32768,8.60,15.247,7.623
+Broadcast,262144,65536,8.42,31.142,15.571
+Broadcast,524288,131072,11.14,47.080,23.540
+Broadcast,1048576,262144,16.87,62.167,31.083
+Broadcast,2097152,524288,24.09,87.039,43.519
+Broadcast,4194304,1048576,33.03,126.971,63.485
+Broadcast,8388608,2097152,50.92,164.746,82.373
+Broadcast,16777216,4194304,86.22,194.595,97.298
+Broadcast,33554432,8388608,159.76,210.032,105.016
+Broadcast,67108864,16777216,297.15,225.844,112.922
+Broadcast,134217728,33554432,570.67,235.193,117.597
+Broadcast,268435456,67108864,1113.51,241.071,120.536
+490975bbbd70:4198:4198 [0] NCCL INFO comm 0x561fc630d930 rank 0 nranks 2 cudaDev 0 busId 83000 - Destroy COMPLETE
+490975bbbd70:4198:4198 [1] NCCL INFO comm 0x561fc6d1a850 rank 1 nranks 2 cudaDev 1 busId 84000 - Destroy COMPLETE
