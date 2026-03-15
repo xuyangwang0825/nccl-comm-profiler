@@ -1,0 +1,153 @@
+NCCL Collective Benchmark: 2 GPUs
+
+d80e2cecb301:5399:5399 [0] NCCL INFO cudaDriverVersion 12080
+d80e2cecb301:5399:5399 [0] NCCL INFO Bootstrap: Using eth0:172.17.0.6<0>
+d80e2cecb301:5399:5399 [0] NCCL INFO NCCL version 2.26.2+cuda12.8
+d80e2cecb301:5399:5404 [0] NCCL INFO NET/Plugin: Could not find: libnccl-net.so. Using internal net plugin.
+d80e2cecb301:5399:5404 [0] NCCL INFO NET/IB : No device found.
+d80e2cecb301:5399:5404 [0] NCCL INFO NET/IB : Using [RO]; OOB eth0:172.17.0.6<0>
+d80e2cecb301:5399:5404 [0] NCCL INFO NET/Socket : Using [0]eth0:172.17.0.6<0>
+d80e2cecb301:5399:5404 [0] NCCL INFO PROFILER/Plugin: Could not find: libnccl-profiler.so. 
+d80e2cecb301:5399:5404 [0] NCCL INFO Using network Socket
+d80e2cecb301:5399:5405 [1] NCCL INFO Using network Socket
+d80e2cecb301:5399:5405 [1] NCCL INFO ncclCommInitAll comm 0x5e7d97881ae0 rank 1 nranks 2 cudaDev 1 nvmlDev 1 busId 82000 commId 0xc2fd62e6e3e2beb9 - Init START
+d80e2cecb301:5399:5404 [0] NCCL INFO ncclCommInitAll comm 0x5e7d96d839c0 rank 0 nranks 2 cudaDev 0 nvmlDev 0 busId 81000 commId 0xc2fd62e6e3e2beb9 - Init START
+d80e2cecb301:5399:5404 [0] NCCL INFO RAS client listening socket at ::1<28028>
+d80e2cecb301:5399:5404 [0] NCCL INFO Bootstrap timings total 0.001041 (create 0.000035, send 0.000108, recv 0.000208, ring 0.000054, delay 0.000001)
+d80e2cecb301:5399:5405 [1] NCCL INFO Bootstrap timings total 0.001074 (create 0.000073, send 0.000173, recv 0.000292, ring 0.000045, delay 0.000000)
+d80e2cecb301:5399:5405 [1] NCCL INFO comm 0x5e7d97881ae0 rank 1 nRanks 2 nNodes 1 localRanks 2 localRank 1 MNNVL 0
+d80e2cecb301:5399:5404 [0] NCCL INFO comm 0x5e7d96d839c0 rank 0 nRanks 2 nNodes 1 localRanks 2 localRank 0 MNNVL 0
+d80e2cecb301:5399:5404 [0] NCCL INFO Channel 00/02 : 0 1
+d80e2cecb301:5399:5405 [1] NCCL INFO Trees [0] -1/-1/-1->1->0 [1] -1/-1/-1->1->0
+d80e2cecb301:5399:5404 [0] NCCL INFO Channel 01/02 : 0 1
+d80e2cecb301:5399:5405 [1] NCCL INFO P2P Chunksize set to 131072
+d80e2cecb301:5399:5404 [0] NCCL INFO Trees [0] 1/-1/-1->0->-1 [1] 1/-1/-1->0->-1
+d80e2cecb301:5399:5404 [0] NCCL INFO P2P Chunksize set to 131072
+d80e2cecb301:5399:5404 [0] NCCL INFO Check P2P Type intraNodeP2pSupport 1 directMode 1
+d80e2cecb301:5399:5407 [0] NCCL INFO [Proxy Service] Device 0 CPU core 83
+d80e2cecb301:5399:5408 [1] NCCL INFO [Proxy Service] Device 1 CPU core 56
+d80e2cecb301:5399:5410 [1] NCCL INFO [Proxy Service UDS] Device 1 CPU core 92
+d80e2cecb301:5399:5409 [0] NCCL INFO [Proxy Service UDS] Device 0 CPU core 75
+d80e2cecb301:5399:5404 [0] NCCL INFO threadThresholds 8/8/64 | 16/8/64 | 512 | 512
+d80e2cecb301:5399:5404 [0] NCCL INFO 2 coll channels, 2 collnet channels, 0 nvls channels, 2 p2p channels, 2 p2p channels per peer
+d80e2cecb301:5399:5405 [1] NCCL INFO threadThresholds 8/8/64 | 16/8/64 | 512 | 512
+d80e2cecb301:5399:5405 [1] NCCL INFO 2 coll channels, 2 collnet channels, 0 nvls channels, 2 p2p channels, 2 p2p channels per peer
+d80e2cecb301:5399:5404 [0] NCCL INFO CC Off, workFifoBytes 1048576
+d80e2cecb301:5399:5404 [0] NCCL INFO TUNER/Plugin: Could not find: libnccl-tuner.so. Using internal tuner plugin.
+d80e2cecb301:5399:5404 [0] NCCL INFO ncclCommInitAll comm 0x5e7d96d839c0 rank 0 nranks 2 cudaDev 0 nvmlDev 0 busId 81000 commId 0xc2fd62e6e3e2beb9 - Init COMPLETE
+d80e2cecb301:5399:5404 [0] NCCL INFO Init timings - ncclCommInitAll: rank 0 nranks 2 total 0.22 (kernels 0.18, alloc 0.02, bootstrap 0.00, allgathers 0.00, topo 0.01, graphs 0.00, connections 0.00, rest 0.00)
+d80e2cecb301:5399:5405 [1] NCCL INFO ncclCommInitAll comm 0x5e7d97881ae0 rank 1 nranks 2 cudaDev 1 nvmlDev 1 busId 82000 commId 0xc2fd62e6e3e2beb9 - Init COMPLETE
+d80e2cecb301:5399:5405 [1] NCCL INFO Init timings - ncclCommInitAll: rank 1 nranks 2 total 0.22 (kernels 0.19, alloc 0.02, bootstrap 0.00, allgathers 0.00, topo 0.01, graphs 0.00, connections 0.00, rest 0.00)
+# op,size_bytes,count,time_us,algbw_GBps,busbw_GBps
+d80e2cecb301:5399:5411 [1] NCCL INFO Channel 00/0 : 1[1] -> 0[0] via P2P/direct pointer
+d80e2cecb301:5399:5411 [1] NCCL INFO Channel 01/0 : 1[1] -> 0[0] via P2P/direct pointer
+d80e2cecb301:5399:5412 [0] NCCL INFO Channel 00/0 : 0[0] -> 1[1] via P2P/direct pointer
+d80e2cecb301:5399:5412 [0] NCCL INFO Channel 01/0 : 0[0] -> 1[1] via P2P/direct pointer
+d80e2cecb301:5399:5411 [1] NCCL INFO Connected all rings, use ring PXN 0 GDR 1
+d80e2cecb301:5399:5412 [0] NCCL INFO Connected all rings, use ring PXN 0 GDR 1
+AllReduce,8,2,8.14,0.001,0.001
+AllReduce,16,4,8.09,0.002,0.002
+AllReduce,32,8,8.04,0.004,0.004
+AllReduce,64,16,8.55,0.007,0.007
+AllReduce,128,32,8.04,0.016,0.016
+AllReduce,256,64,8.04,0.032,0.032
+AllReduce,512,128,8.09,0.063,0.063
+AllReduce,1024,256,8.40,0.122,0.122
+AllReduce,2048,512,8.09,0.253,0.253
+AllReduce,4096,1024,8.14,0.503,0.503
+AllReduce,8192,2048,8.45,0.970,0.970
+AllReduce,16384,4096,11.06,1.482,1.482
+AllReduce,32768,8192,15.26,2.148,2.148
+AllReduce,65536,16384,24.58,2.667,2.667
+AllReduce,131072,32768,42.09,3.114,3.114
+AllReduce,262144,65536,56.94,4.604,4.604
+AllReduce,524288,131072,95.13,5.511,5.511
+AllReduce,1048576,262144,163.64,6.408,6.408
+AllReduce,2097152,524288,314.06,6.678,6.678
+AllReduce,4194304,1048576,630.58,6.652,6.652
+AllReduce,8388608,2097152,1267.46,6.618,6.618
+AllReduce,16777216,4194304,2524.11,6.647,6.647
+AllReduce,33554432,8388608,5014.16,6.692,6.692
+AllReduce,67108864,16777216,10012.16,6.703,6.703
+AllReduce,134217728,33554432,19986.79,6.715,6.715
+AllReduce,268435456,67108864,39934.67,6.722,6.722
+AllGather,8,2,8.80,0.001,0.000
+AllGather,16,4,8.65,0.002,0.001
+AllGather,32,8,8.60,0.004,0.002
+AllGather,64,16,9.06,0.007,0.004
+AllGather,128,32,8.60,0.015,0.007
+AllGather,256,64,8.60,0.030,0.015
+AllGather,512,128,8.84,0.058,0.029
+AllGather,1024,256,8.86,0.116,0.058
+AllGather,2048,512,8.65,0.237,0.118
+AllGather,4096,1024,8.55,0.479,0.240
+AllGather,8192,2048,9.11,0.899,0.449
+AllGather,16384,4096,10.65,1.538,0.769
+AllGather,32768,8192,15.10,2.169,1.085
+AllGather,65536,16384,23.90,2.742,1.371
+AllGather,131072,32768,40.29,3.253,1.626
+AllGather,262144,65536,59.03,4.441,2.220
+AllGather,524288,131072,96.92,5.409,2.705
+AllGather,1048576,262144,170.03,6.167,3.083
+AllGather,2097152,524288,332.90,6.300,3.150
+AllGather,4194304,1048576,664.01,6.317,3.158
+AllGather,8388608,2097152,1310.00,6.404,3.202
+AllGather,16777216,4194304,2602.80,6.446,3.223
+AllGather,33554432,8388608,5192.85,6.462,3.231
+AllGather,67108864,16777216,10367.64,6.473,3.236
+AllGather,134217728,33554432,20718.59,6.478,3.239
+AllGather,268435456,67108864,41414.76,6.482,3.241
+ReduceScatter,8,2,8.69,0.001,0.000
+ReduceScatter,16,4,8.59,0.002,0.001
+ReduceScatter,32,8,8.86,0.004,0.002
+ReduceScatter,64,16,8.55,0.007,0.004
+ReduceScatter,128,32,8.55,0.015,0.007
+ReduceScatter,256,64,8.55,0.030,0.015
+ReduceScatter,512,128,8.65,0.059,0.030
+ReduceScatter,1024,256,8.55,0.120,0.060
+ReduceScatter,2048,512,8.60,0.238,0.119
+ReduceScatter,4096,1024,8.60,0.476,0.238
+ReduceScatter,8192,2048,9.06,0.904,0.452
+ReduceScatter,16384,4096,10.70,1.531,0.766
+ReduceScatter,32768,8192,15.26,2.148,1.074
+ReduceScatter,65536,16384,24.32,2.695,1.348
+ReduceScatter,131072,32768,39.99,3.278,1.639
+ReduceScatter,262144,65536,60.11,4.361,2.181
+ReduceScatter,524288,131072,100.10,5.238,2.619
+ReduceScatter,1048576,262144,176.58,5.938,2.969
+ReduceScatter,2097152,524288,348.71,6.014,3.007
+ReduceScatter,4194304,1048576,703.85,5.959,2.980
+ReduceScatter,8388608,2097152,1413.70,5.934,2.967
+ReduceScatter,16777216,4194304,2775.09,6.046,3.023
+ReduceScatter,33554432,8388608,5555.66,6.040,3.020
+ReduceScatter,67108864,16777216,11054.64,6.071,3.035
+ReduceScatter,134217728,33554432,22006.27,6.099,3.050
+ReduceScatter,268435456,67108864,43890.64,6.116,3.058
+Broadcast,8,2,8.76,0.001,0.000
+Broadcast,16,4,9.00,0.002,0.001
+Broadcast,32,8,8.60,0.004,0.002
+Broadcast,64,16,8.60,0.007,0.004
+Broadcast,128,32,8.60,0.015,0.007
+Broadcast,256,64,8.96,0.029,0.014
+Broadcast,512,128,8.55,0.060,0.030
+Broadcast,1024,256,8.60,0.119,0.060
+Broadcast,2048,512,8.50,0.241,0.120
+Broadcast,4096,1024,8.91,0.460,0.230
+Broadcast,8192,2048,8.60,0.953,0.476
+Broadcast,16384,4096,8.90,1.840,0.920
+Broadcast,32768,8192,11.57,2.832,1.416
+Broadcast,65536,16384,17.45,3.755,1.878
+Broadcast,131072,32768,26.88,4.876,2.438
+Broadcast,262144,65536,38.35,6.836,3.418
+Broadcast,524288,131072,61.53,8.521,4.260
+Broadcast,1048576,262144,107.67,9.738,4.869
+Broadcast,2097152,524288,198.95,10.541,5.270
+Broadcast,4194304,1048576,394.04,10.644,5.322
+Broadcast,8388608,2097152,769.74,10.898,5.449
+Broadcast,16777216,4194304,1523.46,11.013,5.506
+Broadcast,33554432,8388608,3030.53,11.072,5.536
+Broadcast,67108864,16777216,6044.21,11.103,5.551
+Broadcast,134217728,33554432,12070.76,11.119,5.560
+Broadcast,268435456,67108864,24127.59,11.126,5.563
+d80e2cecb301:5399:5418 [0] NCCL INFO comm 0x5e7d96d839c0 rank 0 nranks 2 cudaDev 0 busId 81000 - Destroy COMPLETE
+d80e2cecb301:5399:5418 [1] NCCL INFO comm 0x5e7d97881ae0 rank 1 nranks 2 cudaDev 1 busId 82000 - Destroy COMPLETE

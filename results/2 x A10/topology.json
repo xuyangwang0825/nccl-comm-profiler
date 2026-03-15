@@ -1,0 +1,10 @@
+{
+  "n_ranks": 0,
+  "nvlink_pairs": [],
+  "ib_device": "",
+  "algorithm": "",
+  "ring_orders": [],
+  "notes": [
+    "No NVLink or IB detected \u2014 GPUs communicate via PCIe (~32 GB/s busbw)"
+  ]
+}
