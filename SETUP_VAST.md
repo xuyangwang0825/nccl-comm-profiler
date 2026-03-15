@@ -265,6 +265,17 @@ nvcc --version   # check version
 # If it does: cmake .. -DCMAKE_CUDA_ARCHITECTURES=80
 ```
 
+**`ring_allreduce` binary missing after build / `<barrier>` not found**
+```bash
+# ring_allreduce.cu uses std::barrier (C++20). If CMAKE_CUDA_STANDARD was set to 17,
+# nvcc compiles it as C++17 and <barrier> is unavailable.
+# Fix: the repo sets CMAKE_CUDA_STANDARD 20, but if you see this error wipe and rebuild:
+cd ~/nccl-comm-profiler && rm -rf build
+mkdir build && cd build
+cmake .. -DCMAKE_BUILD_TYPE=Release -DCMAKE_CUDA_ARCHITECTURES=86
+make -j$(nproc)
+```
+
 **`std::barrier` compile error**
 ```bash
 g++ --version

@@ -5,7 +5,7 @@ project(nccl_comm_profiler LANGUAGES CXX CUDA)
 # C++20 for std::barrier (used in ring_allreduce.cu host code)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-set(CMAKE_CUDA_STANDARD 17)
+set(CMAKE_CUDA_STANDARD 20)
 set(CMAKE_CUDA_STANDARD_REQUIRED ON)
 
 # ── GPU architectures ──────────────────────────────────────────────────────
